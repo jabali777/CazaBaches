@@ -15,7 +15,22 @@
           <theme>@style/Theme.Practica</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/drawer_menu.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/nav_header.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/register_login.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/menu/drawer_menu.xml">
         <config>
           <theme>@style/Theme.Practica</theme>
         </config>
@@ -27,19 +42,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4c1e152-3c44-442c-9d32-dfe53d187fac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/LoginActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/RegisterActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/SessionManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_register.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/register_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_logout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_person.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/nav_header.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/menu/drawer_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +62,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[LocalEmulator::path=C:\Users\Usuario\.android\avd\Medium_Phone.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[PhysicalDevice::serial=ZY22BJZ895]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -219,12 +232,12 @@
       <map>
         <entry key="com.example.practica">
           <value>
-            <CheckInfo lastCheckTimestamp="1777930657242" />
+            <CheckInfo lastCheckTimestamp="1778198838921" />
           </value>
         </entry>
         <entry key="com.example.practica.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1777930657242" />
+            <CheckInfo lastCheckTimestamp="1778198838920" />
           </value>
         </entry>
       </map>
