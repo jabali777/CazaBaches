@@ -1,55 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    activity_login.xml — REDISEÑADO con paleta Cazabaches
+    IDs conservados tal cual usa LoginActivity.kt:
+      login_layout, et_email, et_password, btn_login, progress_bar, tv_ir_registro
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp">
+    android:background="@color/gray_bg"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp"/>
-
-    <EditText
-        android:id="@+id/et_email"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:layout_marginBottom="24dp"/>
+        <!-- ── HEADER NARANJA ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/orange_civico"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="40dp"
+            android:paddingBottom="28dp">
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingresar"/>
+            <!-- Ícono de la app -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginTop="16dp"/>
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_mylocation"
+                    android:tint="@color/orange_civico"
+                    android:contentDescription="Cazabaches" />
+            </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv_ir_registro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¿No tenés cuenta? Registrate"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/purple_500"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Cazabaches"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Mejorá tu ciudad"
+                android:textColor="#CCFFFFFF"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- ── CARD PRINCIPAL ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Ingresá para reportar problemas en tu barrio"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="13sp" />
+
+                <!-- Campo Email -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo electrónico"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxStrokeColor="@color/orange_civico"
+                    app:hintTextColor="@color/orange_dark"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:imeOptions="actionNext" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Campo Contraseña -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Contraseña"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxStrokeColor="@color/orange_civico"
+                    app:hintTextColor="@color/orange_dark"
+                    app:endIconMode="password_toggle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:imeOptions="actionDone" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Botón Ingresar -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="Ingresar"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/orange_civico"
+                    app:cornerRadius="12dp" />
+
+                <!-- ProgressBar (mantenida invisible, igual que en el Kotlin) -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:indeterminateTint="@color/orange_civico"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Link a Registro (usa el ID tv_ir_registro del Kotlin) -->
+        <TextView
+            android:id="@+id/tv_ir_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="¿No tenés cuenta? Registrate"
+            android:textColor="@color/orange_dark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

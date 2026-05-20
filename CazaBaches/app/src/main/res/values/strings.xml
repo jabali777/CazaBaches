@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Practica</string>
+    <string name="app_name">Cazabaches</string>
+    <string name="nav_header_title">CazaBaches</string>
+    <string name="nav_header_subtitle">usuario@ejemplo.com</string>
+    <string name="desc_profile_pic">Foto de perfil</string>
 </resources>

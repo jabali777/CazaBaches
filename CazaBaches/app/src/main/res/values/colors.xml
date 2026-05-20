@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Paleta Cazabaches -->
+    <color name="orange_civico">#F0890A</color>
+    <color name="orange_dark">#BA6A08</color>
+    <color name="orange_deep">#633806</color>
+    <color name="orange_light">#FAEEDA</color>
+
+    <color name="green_resuelto">#1D9E75</color>
+    <color name="green_light">#E1F5EE</color>
+    <color name="blue_institucional">#1D6FA4</color>
+    <color name="red_peligro">#E24B4A</color>
+
+    <color name="gray_bg">#F5F4F0</color>
+    <color name="gray_mid">#D3D1C7</color>
+    <color name="gray_dark">#5F5E5A</color>
+    <color name="text_primary">#1A1A18</color>
+
+    <!-- Compatibilidad con el código Kotlin existente -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_500">#F0890A</color>
 </resources>

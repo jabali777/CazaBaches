@@ -1,7 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Mismo tema para dark mode — mantenemos naranja consistente -->
     <style name="Base.Theme.Practica" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/orange_civico</item>
+        <item name="colorPrimaryVariant">@color/orange_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/orange_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor">@color/orange_civico</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
+
+    <style name="Theme.Practica" parent="Base.Theme.Practica" />
 </resources>

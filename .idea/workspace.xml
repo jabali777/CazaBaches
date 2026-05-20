@@ -5,6 +5,31 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_launcher_background.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_launcher_foreground.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_logout.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_menu.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_person.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_login.xml">
         <config>
           <theme>@style/Theme.Practica</theme>
@@ -15,8 +40,9 @@
           <theme>@style/Theme.Practica</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/drawer_menu.xml">
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_register.xml">
         <config>
+          <state>Portrait</state>
           <theme>@style/Theme.Practica</theme>
         </config>
       </layout>
@@ -35,6 +61,16 @@
           <theme>@style/Theme.Practica</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-anydpi/ic_launcher.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
@@ -42,17 +78,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4c1e152-3c44-442c-9d32-dfe53d187fac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_logout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_person.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/nav_header.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/menu/drawer_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/nav_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/nav_header.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/register_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/register_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/menu/drawer_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/values/themes.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +100,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[PhysicalDevice::serial=ZY22BJZ895]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[PhysicalDevice::serial=320145991635]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -134,7 +172,7 @@
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;WIP&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/AndroidStudioProjects/CazaBaches&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -232,12 +270,12 @@
       <map>
         <entry key="com.example.practica">
           <value>
-            <CheckInfo lastCheckTimestamp="1778198838921" />
+            <CheckInfo lastCheckTimestamp="1778910318557" />
           </value>
         </entry>
         <entry key="com.example.practica.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1778198838920" />
+            <CheckInfo lastCheckTimestamp="1778910318557" />
           </value>
         </entry>
       </map>
