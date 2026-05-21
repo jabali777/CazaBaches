@@ -1,7 +1,9 @@
+import os
+
 class Config:
-    MYSQL_HOST = 'localhost'       # siempre localhost en local
-    MYSQL_USER = 'root'            # tu usuario de MySQL
-    MYSQL_PASSWORD = ''            # tu contraseña (vacía si usás XAMPP/WAMP)
-    MYSQL_DB = 'cazabaches'      # el nombre de la base de datos
+    MYSQL_HOST = 'localhost'
+    MYSQL_USER = 'root'
+    MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', '')
+    MYSQL_DB = 'cazabaches'
     MYSQL_CURSORCLASS = 'DictCursor'
-    JWT_SECRET = 'goku_ssj3_whis_ssjg'
+    JWT_SECRET = os.environ.get('JWT_SECRET')

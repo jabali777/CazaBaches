@@ -74,7 +74,9 @@ class LoginActivity : AppCompatActivity() {
                     setLoading(false)
                     if (response.isSuccessful) {
                         val body = response.body()
-                        body?.token?.let { session.guardarToken(it) }
+                        body?.token?.let { token ->
+                            session.guardarSesion(token, email)
+                        }
                         goToMain()
                     } else {
                         val error = response.errorBody()?.string() ?: "Error desconocido"

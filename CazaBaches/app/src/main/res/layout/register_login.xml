@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    activity_register.xml — REDISEÑADO con paleta Cazabaches
-    (Este archivo no lo usa el Kotlin directamente — usa register_login.xml)
-    IDs: register_layout, et_email, et_password, btn_registro, progress_bar
--->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/register_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_bg"
+    android:background="#F5F0EB"
     android:fillViewport="true">
 
     <LinearLayout
@@ -19,44 +14,52 @@
         android:orientation="vertical">
 
         <!-- ── HEADER NARANJA ── -->
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="@color/orange_civico"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:paddingStart="24dp"
-            android:paddingTop="40dp"
-            android:paddingBottom="28dp">
+            android:layout_height="200dp"
+            android:background="#E85D1A">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Crear cuenta"
-                android:textColor="@color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="bottom"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="40dp"
+                android:paddingBottom="44dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Unite a la comunidad que mejora la ciudad"
-                android:textColor="#CCFFFFFF"
-                android:textSize="13sp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crear cuenta"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Unite a la comunidad que mejora la ciudad"
+                    android:textColor="#BDFFFFFF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- ── CARD PRINCIPAL ── -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="-24dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="32dp"
-            app:cardCornerRadius="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="-28dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="@color/white">
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,51 +67,92 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
+                <!-- Label Email -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CORREO ELECTRÓNICO"
+                    android:textColor="#E85D1A"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="6dp" />
+
                 <!-- Campo Email -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Correo electrónico"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="@color/orange_civico"
-                    app:hintTextColor="@color/orange_dark"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxBackgroundColor="#F7F4F0"
+                    app:boxStrokeColor="#E85D1A"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="1.5dp"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@android:drawable/ic_dialog_email"
+                    app:startIconTint="#C0B8B0"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="tu@correo.com"
                         android:inputType="textEmailAddress"
-                        android:imeOptions="actionNext" />
+                        android:imeOptions="actionNext"
+                        android:textSize="13sp"
+                        android:textColor="#1A1A1A"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Label Contraseña -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONTRASEÑA"
+                    android:textColor="#E85D1A"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="6dp" />
 
                 <!-- Campo Contraseña -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:hint="Contraseña (mín. 6 caracteres)"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="@color/orange_civico"
-                    app:hintTextColor="@color/orange_dark"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxBackgroundColor="#F7F4F0"
+                    app:boxStrokeColor="#E85D1A"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="1.5dp"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@android:drawable/ic_lock_lock"
+                    app:startIconTint="#C0B8B0"
                     app:endIconMode="password_toggle"
+                    app:endIconTint="#C0B8B0"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Mínimo 6 caracteres"
                         android:inputType="textPassword"
-                        android:imeOptions="actionDone" />
+                        android:imeOptions="actionDone"
+                        android:textSize="13sp"
+                        android:textColor="#1A1A1A"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Botón Registrarse -->
+                <!-- Botón Crear cuenta -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_registro"
                     android:layout_width="match_parent"
@@ -117,10 +161,11 @@
                     android:paddingTop="14dp"
                     android:paddingBottom="14dp"
                     android:text="Crear cuenta"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/orange_civico"
+                    android:textColor="#FFFFFF"
+                    android:letterSpacing="0.01"
+                    app:backgroundTint="#E85D1A"
                     app:cornerRadius="12dp" />
 
                 <!-- ProgressBar -->
@@ -129,12 +174,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:indeterminateTint="@color/orange_civico"
+                    android:layout_marginTop="12dp"
+                    android:indeterminateTint="#E85D1A"
                     android:visibility="gone" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <!-- Link a Login -->
+        <TextView
+            android:id="@+id/tv_ir_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="36dp"
+            android:text="¿Ya tenés cuenta? Iniciá sesión"
+            android:textColor="#E85D1A"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>

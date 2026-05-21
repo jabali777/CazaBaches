@@ -1,6 +1,7 @@
 package com.example.practica
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var btnMenu: FloatingActionButton
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
 
     private var locationMarker: Marker? = null
     private val handler = Handler(Looper.getMainLooper())
@@ -55,12 +58,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -69,31 +73,35 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         session = SessionManager(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)  // ← fix
+
+        val headerView = navView.getHeaderView(0)
+        val tvUserEmail = headerView.findViewById<TextView>(R.id.tv_user_email)
+        tvUserEmail.text = session.obtenerEmail()
 
         btnMenu = findViewById(R.id.btn_menu)
         btnMenu.setOnClickListener {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START)
-            } else {
-                drawerLayout.openDrawer(GravityCompat.START)
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_perfil -> {
+                    startActivity(Intent(this, Profile::class.java))
+                }
+                R.id.nav_configuraciones -> {
+                    // TODO
+                }
+                R.id.nav_cerrar_sesion -> {
+                    session.cerrarSesion()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
             }
-        }
-
-        findViewById<TextView>(R.id.nav_perfil).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
-        }
-
-        findViewById<TextView>(R.id.nav_configuraciones).setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        }
-
-        findViewById<TextView>(R.id.nav_cerrar_sesion).setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
-            session.cerrarSesion()
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
+            true
         }
 
         val mapFragment = supportFragmentManager

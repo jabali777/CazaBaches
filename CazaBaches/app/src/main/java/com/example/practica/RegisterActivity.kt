@@ -67,7 +67,9 @@ class RegisterActivity : AppCompatActivity() {
                     setLoading(false)
                     if (response.isSuccessful) {
                         val body = response.body()
-                        body?.token?.let { session.guardarToken(it) }
+                        body?.token?.let { token ->
+                            session.guardarSesion(token, email)
+                        }
                         Toast.makeText(this@RegisterActivity,
                             "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@RegisterActivity, MainActivity::class.java)

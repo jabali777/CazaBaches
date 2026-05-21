@@ -1,14 +1,19 @@
+from dotenv import load_dotenv
+load_dotenv(override=True)
+
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from config import Config
 import bcrypt
 import jwt
 import datetime
+import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
 mysql = MySQL(app)
-
+print("JWT desde os.environ:", os.environ.get('JWT_SECRET'))
+print("MySQL pass:", os.environ.get('MYSQL_PASSWORD'))
 # ─── REGISTRO ────────────────────────────────────────────────
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -63,12 +68,13 @@ def login():
             return jsonify({'error': 'Credenciales incorrectas'}), 401
 
         if not bcrypt.checkpw(password.encode('utf-8'), user['password_hash'].encode('utf-8')):
-            return jsonify({'error': 'Credenciales incorrectas'}), 401
+            return jsonify({'error': 'Contraseña incorrecta'}), 401
 
         token = generar_token(user['id'], user['email'])
         return jsonify({'token': token, 'email': user['email']}), 200
 
     except Exception as e:
+        print(f"ERROR REAL: {e}")
         return jsonify({'error': 'Error interno del servidor'}), 500
 
 
@@ -77,7 +83,7 @@ def generar_token(user_id, email):
     payload = {
         'user_id': user_id,
         'email': email,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=7)
+        'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=7)
     }
     return jwt.encode(payload, app.config['JWT_SECRET'], algorithm='HS256')
 
