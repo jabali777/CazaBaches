@@ -91,7 +91,7 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="1.5dp"
                     app:hintEnabled="false"
-                    app:startIconDrawable="@android:drawable/ic_dialog_email"
+                    app:startIconDrawable="@drawable/ic_email"
                     app:startIconTint="#C0B8B0"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -99,7 +99,6 @@
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="tu@correo.com"
                         android:inputType="textEmailAddress"
                         android:imeOptions="actionNext"
                         android:textSize="13sp"
@@ -133,7 +132,7 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="1.5dp"
                     app:hintEnabled="false"
-                    app:startIconDrawable="@android:drawable/ic_lock_lock"
+                    app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="#C0B8B0"
                     app:endIconMode="password_toggle"
                     app:endIconTint="#C0B8B0"
@@ -143,7 +142,6 @@
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Mínimo 6 caracteres"
                         android:inputType="textPassword"
                         android:imeOptions="actionDone"
                         android:textSize="13sp"

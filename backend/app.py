@@ -8,6 +8,7 @@ import bcrypt
 import jwt
 import datetime
 import os
+import MySQLdb.cursors
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -31,7 +32,7 @@ def register():
     password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
     try:
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.execute("INSERT INTO usuarios (email, password_hash) VALUES (%s, %s)",
                     (email, password_hash))
         mysql.connection.commit()
@@ -59,7 +60,7 @@ def login():
         return jsonify({'error': 'Email y contraseña requeridos'}), 400
 
     try:
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.execute("SELECT id, email, password_hash FROM usuarios WHERE email = %s", (email,))
         user = cur.fetchone()
         cur.close()

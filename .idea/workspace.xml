@@ -5,12 +5,22 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_email.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_launcher_background.xml">
         <config>
           <theme>@style/Theme.Practica</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_launcher_foreground.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_lock.xml">
         <config>
           <theme>@style/Theme.Practica</theme>
         </config>
@@ -26,6 +36,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_person.xml">
+        <config>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_star.xml">
         <config>
           <theme>@style/Theme.Practica</theme>
         </config>
@@ -72,24 +87,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4c1e152-3c44-442c-9d32-dfe53d187fac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/Profile.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_profile.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_email.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_lock.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/LoginActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/RegisterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/RegisterActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/SessionManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/SessionManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_login.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/nav_header.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/register_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/register_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CazaBaches/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-anydpi/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cazabaches .sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +164,7 @@
       <list>
         <option value="layoutResourceFile" />
         <option value="Kotlin Class" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -165,13 +200,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Android App.app.executor": "Debug",
+    "Android App.app.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "WIP",
@@ -272,12 +308,12 @@
       <map>
         <entry key="com.example.practica">
           <value>
-            <CheckInfo lastCheckTimestamp="1779316268615" />
+            <CheckInfo lastCheckTimestamp="1779742051388" />
           </value>
         </entry>
         <entry key="com.example.practica.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1779316268614" />
+            <CheckInfo lastCheckTimestamp="1779742051395" />
           </value>
         </entry>
       </map>

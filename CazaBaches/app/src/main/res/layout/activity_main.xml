@@ -28,12 +28,13 @@
             android:id="@+id/btn_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
             android:src="@drawable/ic_menu"
             android:contentDescription="Menú"
             app:backgroundTint="#E85D1A"
             app:tint="@color/white"
-            app:elevation="8dp"
+            app:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,7 +86,7 @@
             android:text="Perfil"
             android:textColor="#1A1A1A"
             android:textSize="15sp"
-            android:drawableStart="@android:drawable/ic_menu_myplaces"
+            android:drawableStart="@drawable/ic_person"
             android:drawablePadding="16dp"
             android:drawableTint="#E85D1A"
             android:background="?attr/selectableItemBackground" />
@@ -107,7 +108,7 @@
             android:text="Configuraciones"
             android:textColor="#1A1A1A"
             android:textSize="15sp"
-            android:drawableStart="@android:drawable/ic_menu_preferences"
+            android:drawableStart="@drawable/ic_settings"
             android:drawablePadding="16dp"
             android:drawableTint="#E85D1A"
             android:background="?attr/selectableItemBackground" />
@@ -141,7 +142,7 @@
             android:textColor="#E85D1A"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:drawableStart="@android:drawable/ic_menu_close_clear_cancel"
+            android:drawableStart="@drawable/ic_logout"
             android:drawablePadding="16dp"
             android:drawableTint="#E85D1A"
             android:background="?attr/selectableItemBackground"

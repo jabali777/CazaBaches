@@ -31,7 +31,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var btnMenu: FloatingActionButton
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
 
     private var locationMarker: Marker? = null
     private val handler = Handler(Looper.getMainLooper())
@@ -61,6 +59,15 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // ── 1. CHEQUEO DE SESIÓN ──
+        session = SessionManager(this)
+        if (!session.estaLogueado()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
@@ -70,38 +77,31 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             insets
         }
 
-        session = SessionManager(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)  // ← fix
-
-        val headerView = navView.getHeaderView(0)
-        val tvUserEmail = headerView.findViewById<TextView>(R.id.tv_user_email)
-        tvUserEmail.text = session.obtenerEmail()
 
         btnMenu = findViewById(R.id.btn_menu)
         btnMenu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_perfil -> {
-                    startActivity(Intent(this, Profile::class.java))
-                }
-                R.id.nav_configuraciones -> {
-                    // TODO
-                }
-                R.id.nav_cerrar_sesion -> {
-                    session.cerrarSesion()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
-            }
+        // ── 2. CLICKS DEL DRAWER ──
+        findViewById<TextView>(R.id.nav_perfil).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
-            true
+            startActivity(Intent(this, Profile::class.java))
+        }
+
+        findViewById<TextView>(R.id.nav_configuraciones).setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            // TODO
+        }
+
+        findViewById<TextView>(R.id.nav_cerrar_sesion).setOnClickListener {
+            session.cerrarSesion()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
 
         val mapFragment = supportFragmentManager
@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+    @Suppress("DEPRECATION")
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -149,6 +150,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun startLocationUpdates() {
+        handler.removeCallbacks(locationRunnable)
         handler.post(locationRunnable)
     }
 

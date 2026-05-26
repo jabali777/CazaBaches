@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@color/orange_civico"
+        android:background="#E85D1A"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp">
@@ -54,13 +54,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="#FFFFFF"
             android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Información del Usuario"
-                android:textColor="@color/orange_civico"
+                android:textColor="#E85D1A"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"/>
@@ -86,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Volver"
-                android:backgroundTint="@color/orange_civico"
+                android:backgroundTint="#E85D1A"
                 android:textColor="@color/white"/>
 
         </LinearLayout>

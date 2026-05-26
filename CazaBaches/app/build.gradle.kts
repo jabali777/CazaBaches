@@ -8,7 +8,6 @@ val secretsFile = rootProject.file("secrets.properties")
 val secrets = Properties().apply {
     if (secretsFile.exists()) load(secretsFile.inputStream())
 }
-
 android {
     namespace = "com.example.practica"
     compileSdk = 36

@@ -19,7 +19,6 @@
             android:layout_height="220dp"
             android:background="#E85D1A">
 
-            <!-- Logo + Nombre + Tagline -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -30,7 +29,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp">
 
-                <!-- Ícono con fondo blanco redondeado -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -68,7 +66,7 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- ── CARD PRINCIPAL (overlap -28dp sobre el header) ── -->
+        <!-- ── CARD PRINCIPAL ── -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,7 +84,6 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <!-- Título y subtítulo -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -128,7 +125,7 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="1.5dp"
                     app:hintEnabled="false"
-                    app:startIconDrawable="@android:drawable/ic_dialog_email"
+                    app:startIconDrawable="@drawable/ic_email"
                     app:startIconTint="#C0B8B0"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -136,7 +133,6 @@
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="tu@correo.com"
                         android:inputType="textEmailAddress"
                         android:imeOptions="actionNext"
                         android:textSize="13sp"
@@ -170,7 +166,7 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="1.5dp"
                     app:hintEnabled="false"
-                    app:startIconDrawable="@android:drawable/ic_lock_lock"
+                    app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="#C0B8B0"
                     app:endIconMode="password_toggle"
                     app:endIconTint="#C0B8B0"
@@ -180,7 +176,6 @@
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="••••••••"
                         android:inputType="textPassword"
                         android:imeOptions="actionDone"
                         android:textSize="13sp"
@@ -204,7 +199,6 @@
                     android:letterSpacing="0.01"
                     app:backgroundTint="#E85D1A"
                     app:cornerRadius="12dp"
-                    app:icon="@android:drawable/ic_media_play"
                     app:iconTint="#FFFFFF"
                     app:iconGravity="textEnd" />
 
@@ -229,7 +223,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="36dp"
-            android:text="¿No tenés cuenta? Registrate gratis"
+            android:text="¿No tenés cuenta? Registrate"
             android:textColor="#E85D1A"
             android:textSize="13sp"
             android:textStyle="bold" />
