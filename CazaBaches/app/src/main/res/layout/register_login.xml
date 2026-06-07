@@ -179,18 +179,5 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Link a Login -->
-        <TextView
-            android:id="@+id/tv_ir_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="36dp"
-            android:text="¿Ya tenés cuenta? Iniciá sesión"
-            android:textColor="#E85D1A"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
     </LinearLayout>
 </ScrollView>

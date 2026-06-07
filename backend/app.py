@@ -9,12 +9,38 @@ import jwt
 import datetime
 import os
 import MySQLdb.cursors
+import re
+from functools import wraps
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(Config)
 mysql = MySQL(app)
-print("JWT desde os.environ:", os.environ.get('JWT_SECRET'))
-print("MySQL pass:", os.environ.get('MYSQL_PASSWORD'))
+
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def token_requerido(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.headers.get('Authorization', '')
+        if not auth.startswith('Bearer '):
+            return jsonify({'error': 'Token requerido'}), 401
+        token = auth.split(' ', 1)[1]
+        try:
+            payload = jwt.decode(token, app.config['JWT_SECRET'], algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            return jsonify({'error': 'Token expirado'}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({'error': 'Token inválido'}), 401
+        return f(payload, *args, **kwargs)
+    return decorated
+
+
 # ─── REGISTRO ────────────────────────────────────────────────
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -28,7 +54,6 @@ def register():
     if len(password) < 6:
         return jsonify({'error': 'La contraseña debe tener al menos 6 caracteres'}), 400
 
-    # Hashear contraseña
     password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
     try:
@@ -89,6 +114,90 @@ def generar_token(user_id, email):
     return jwt.encode(payload, app.config['JWT_SECRET'], algorithm='HS256')
 
 
+# ─── CREAR REPORTE ───────────────────────────────────────────
+@app.route('/api/reportes', methods=['POST'])
+@token_requerido
+def crear_reporte(payload):
+    print("FILES:", request.files)
+    print("FORM:", request.form)
+
+    titulo      = request.form.get('titulo', '').strip()
+    descripcion = request.form.get('descripcion', '').strip()
+    latitud     = request.form.get('latitud')
+    longitud    = request.form.get('longitud')
+
+    if not titulo or not latitud or not longitud:
+        return jsonify({'error': 'titulo, latitud y longitud son requeridos'}), 400
+
+    foto_path = None
+    if 'foto' in request.files:
+        foto = request.files['foto']
+        print("FOTO recibida:", foto.filename)
+        print("UPLOAD_FOLDER:", UPLOAD_FOLDER)
+        print("Folder existe:", os.path.exists(UPLOAD_FOLDER))
+
+        if foto.filename and allowed_file(foto.filename):
+            filename = secure_filename(
+                f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}_{foto.filename}"
+            )
+            try:
+                foto.save(os.path.join(UPLOAD_FOLDER, filename))
+                foto_path = filename
+                print("FOTO guardada en:", os.path.join(UPLOAD_FOLDER, filename))
+            except Exception as e:
+                print("ERROR guardando foto:", e)
+        else:
+            print("FOTO rechazada: filename vacío o extensión no permitida")
+    else:
+        print("No se recibió ninguna foto")
+
+    try:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute(
+            "INSERT INTO reportes (usuario_id, titulo, descripcion, latitud, longitud, imagen_path) "
+            "VALUES (%s, %s, %s, %s, %s, %s)",
+            (payload['user_id'], titulo, descripcion, latitud, longitud, foto_path)
+        )
+        mysql.connection.commit()
+        reporte_id = cur.lastrowid
+        cur.close()
+        return jsonify({'id': reporte_id, 'mensaje': 'Reporte creado'}), 201
+    except Exception as e:
+        print(f"ERROR REAL: {e}")
+        return jsonify({'error': 'Error interno del servidor'}), 500
+
+@app.route('/api/reportes', methods=['GET'])
+@token_requerido
+def obtener_reportes(payload):
+    try:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute("""
+            SELECT r.id, r.titulo, r.descripcion, r.latitud, r.longitud,
+                   r.imagen_path, r.fecha, u.email
+            FROM reportes r
+            JOIN usuarios u ON r.usuario_id = u.id
+            ORDER BY r.fecha DESC
+        """)
+        reportes = cur.fetchall()
+        cur.close()
+
+        result = []
+        for r in reportes:
+            result.append({
+                'id': r['id'],
+                'titulo': r['titulo'],
+                'descripcion': r['descripcion'] or '',
+                'latitud': float(r['latitud']),
+                'longitud': float(r['longitud']),
+                'imagen_path': r['imagen_path'] or '',
+                'fecha': r['fecha'].strftime('%d/%m/%Y %H:%M'),
+                'email': r['email']
+            })
+
+        return jsonify(result), 200
+    except Exception as e:
+        print(f"ERROR REAL: {e}")
+        return jsonify({'error': 'Error interno del servidor'}), 500
+
 if __name__ == '__main__':
-    # 0.0.0.0 para que sea accesible desde la red local
     app.run(host='0.0.0.0', port=5000, debug=True)
