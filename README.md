@@ -10,13 +10,14 @@ Instalacion
 	4. Ir a Retrofit y poner tu IP LOCAL o PUBLICA aqui:
 		
 
-		![RetrofitConfiguracion](img-github/RetrofitConfig.png)
+		![RetrofitConfiguracion](https://github.com/jabali777/CazaBaches/blob/c18f5d25f4ae37acf4b437e3f5076a73d3d2355c/img-github/RetrofitConfig.png)
 					
 		A)Para ver tu IP en windows es asi
 
-		![IpconfigExplicacion](img-github/ipconfig.png)		
+		![IpconfigExplicacion](https://github.com/jabali777/CazaBaches/blob/c18f5d25f4ae37acf4b437e3f5076a73d3d2355c/img-github/ipconfig.png)		
 
 
-	5.Ir a el directorio backend, luego ir a app.py y ejecutarlo
-	6.Abrir XAMPP y prender apache, mysql
-	7. 
+	5. Ir a el directorio backend, luego ir a app.py y ejecutarlo
+	6. Abrir XAMPP y prender apache, mysql
+	7. Ejecutar Android studioy conectar un celular a la PC o usar el emulador de Android studio
+	8. Ejecutar el código y listo :)
