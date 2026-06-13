@@ -10,11 +10,11 @@ Instalacion
 	4. Ir a Retrofit y poner tu IP LOCAL o PUBLICA aqui:
 		
 
-		![RetrofitConfiguracion](./img-github/RetrofitConfig.png)
+		![RetrofitConfiguracion](img-github/RetrofitConfig.png)
 					
 		A)Para ver tu IP en windows es asi
 
-		![IpconfigExplicacion](./img-github/ipconfig.png)		
+		![IpconfigExplicacion](img-github/ipconfig.png)		
 
 
 	5.Ir a el directorio backend, luego ir a app.py y ejecutarlo
