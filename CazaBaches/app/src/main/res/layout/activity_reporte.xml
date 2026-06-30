@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Título"
+            android:textColorHint="#3E3E3E"
             app:boxBackgroundColor="#FFFFFF"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="16dp">
@@ -41,6 +42,7 @@
                 android:id="@+id/et_titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:maxLength="100"
                 android:inputType="textCapSentences" />
 
@@ -50,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descripción (opcional)"
+            android:textColorHint="#3E3E3E"
             app:boxBackgroundColor="#FFFFFF"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginBottom="24dp">
@@ -58,6 +61,7 @@
                 android:id="@+id/et_descripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:minLines="3"
                 android:gravity="top"
                 android:inputType="textCapSentences|textMultiLine" />

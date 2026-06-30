@@ -12,6 +12,7 @@ import MySQLdb.cursors
 import re
 from functools import wraps
 from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -20,6 +21,10 @@ mysql = MySQL(app)
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -138,16 +143,20 @@ def crear_reporte(payload):
 
         if foto.filename and allowed_file(foto.filename):
             filename = secure_filename(
-                f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}_{foto.filename}"
-            )
-            try:
-                foto.save(os.path.join(UPLOAD_FOLDER, filename))
-                foto_path = filename
-                print("FOTO guardada en:", os.path.join(UPLOAD_FOLDER, filename))
-            except Exception as e:
-                print("ERROR guardando foto:", e)
+        f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}_{foto.filename}"
+        )
+    try:
+        foto.save(os.path.join(UPLOAD_FOLDER, filename))
+        saved_path = os.path.join(UPLOAD_FOLDER, filename)
+
+        if os.path.getsize(saved_path) == 0:
+            os.remove(saved_path)
+            print("FOTO rechazada: archivo vacío")
         else:
-            print("FOTO rechazada: filename vacío o extensión no permitida")
+                foto_path = filename
+        print("FOTO guardada en:", saved_path)
+    except Exception as e:
+        print("ERROR guardando foto:", e)
     else:
         print("No se recibió ninguna foto")
 
@@ -195,6 +204,57 @@ def obtener_reportes(payload):
             })
 
         return jsonify(result), 200
+    except Exception as e:
+        print(f"ERROR REAL: {e}")
+        return jsonify({'error': 'Error interno del servidor'}), 500
+    
+    
+@app.route('/api/reportes/<int:reporte_id>', methods=['DELETE'])
+@token_requerido
+def borrar_reporte(payload, reporte_id):
+    try:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+        # Verificamos que el reporte exista y pertenezca al usuario logueado
+        cur.execute("SELECT usuario_id, imagen_path FROM reportes WHERE id = %s", (reporte_id,))
+        reporte = cur.fetchone()
+
+        if not reporte:
+            cur.close()
+            return jsonify({'error': 'Reporte no encontrado'}), 404
+
+        if reporte['usuario_id'] != payload['user_id']:
+            cur.close()
+            return jsonify({'error': 'No tenés permiso para borrar este reporte'}), 403
+
+        cur.execute("DELETE FROM reportes WHERE id = %s", (reporte_id,))
+        mysql.connection.commit()
+        cur.close()
+
+        # Borramos también la foto del disco si existía
+        if reporte['imagen_path']:
+            try:
+                foto_path = os.path.join(UPLOAD_FOLDER, reporte['imagen_path'])
+                if os.path.exists(foto_path):
+                    os.remove(foto_path)
+            except Exception as e:
+                print("ERROR borrando archivo de foto:", e)
+
+        return jsonify({'mensaje': 'Reporte borrado'}), 200
+
+    except Exception as e:
+        print(f"ERROR REAL: {e}")
+        return jsonify({'error': 'Error interno del servidor'}), 500
+    
+@app.route('/api/reportes/check', methods=['GET'])
+@token_requerido
+def check_reportes(payload):
+    try:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute("SELECT COUNT(*) AS total, COALESCE(MAX(id), 0) AS max_id FROM reportes")
+        row = cur.fetchone()
+        cur.close()
+        return jsonify({'total': row['total'], 'max_id': row['max_id']}), 200
     except Exception as e:
         print(f"ERROR REAL: {e}")
         return jsonify({'error': 'Error interno del servidor'}), 500

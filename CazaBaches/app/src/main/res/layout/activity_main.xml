@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- ── CONTENIDO PRINCIPAL ── -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -44,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:contentDescription="Reportar bache"
+            app:srcCompat="@android:drawable/ic_input_add"
             app:backgroundTint="#E85D1A"
             app:tint="@color/white"
             app:elevation="5dp"
@@ -51,9 +51,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_borrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="Borrar reporte"
+            app:srcCompat="@android:drawable/ic_menu_delete"
+            app:backgroundTint="#D32F2F"
+            app:tint="@color/white"
+            app:elevation="5dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- ── DRAWER LATERAL ── -->
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"
@@ -61,7 +75,6 @@
         android:background="#FFFFFF"
         android:orientation="vertical">
 
-        <!-- Header del drawer -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
@@ -88,7 +101,6 @@
 
         </LinearLayout>
 
-        <!-- Ítems del menú -->
         <TextView
             android:id="@+id/nav_perfil"
             android:layout_width="match_parent"
@@ -133,7 +145,6 @@
             android:layout_marginEnd="24dp"
             android:background="#EEEEEE" />
 
-        <!-- Espaciador -->
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
