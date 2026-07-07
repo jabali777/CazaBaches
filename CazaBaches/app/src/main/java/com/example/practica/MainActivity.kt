@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -42,6 +41,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.button.MaterialButton
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -60,6 +60,15 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var drawerLayout: DrawerLayout
 
+    private lateinit var bottomSheet: View
+    private lateinit var imgReporte: ImageView
+    private lateinit var txtTitulo: TextView
+    private lateinit var txtDescripcion: TextView
+    private lateinit var txtFecha: TextView
+    private lateinit var btnVerImagen: MaterialButton
+    private lateinit var btnCerrar: MaterialButton
+
+    private var reporteActual: Reporte? = null
     private var locationMarker: Marker? = null
     private var currentLatLng: LatLng? = null
     private val handler = Handler(Looper.getMainLooper())
@@ -92,11 +101,28 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        bottomSheet = findViewById(R.id.bottomSheetReporte)
+        imgReporte = findViewById(R.id.imgReporte)
+        txtTitulo = findViewById(R.id.txtTitulo)
+        txtDescripcion = findViewById(R.id.txtDescripcion)
+        txtFecha = findViewById(R.id.txtFecha)
+        btnVerImagen = findViewById(R.id.btnVerImagen)
+        btnCerrar = findViewById(R.id.btnCerrar)
+        
+        bottomSheet.visibility = View.GONE
+        
+        btnCerrar.setOnClickListener { ocultarBottomSheet() }
+        btnVerImagen.setOnClickListener {
+            reporteActual?.bitmapCache?.let { mostrarImagenCompleta(it) }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         drawerLayout = findViewById(R.id.drawer_layout)
         btnMenu = findViewById(R.id.btn_menu)
@@ -128,12 +154,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
             finish()
         }
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START)
+                } else if (bottomSheet.visibility == View.VISIBLE) {
+                    ocultarBottomSheet()
                 } else {
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
@@ -142,52 +172,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         })
     }
 
-    private fun mostrarDialogoReporte() {
-        val latLng = currentLatLng
-        if (latLng == null) {
-            Toast.makeText(this, "Esperando ubicación...", Toast.LENGTH_SHORT).show()
-            return
+    private fun requestLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            startLocationUpdates()
         }
-        val intent = Intent(this, ReporteActivity::class.java)
-        intent.putExtra("latitud", latLng.latitude)
-        intent.putExtra("longitud", latLng.longitude)
-        startActivity(intent)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        mMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
-            override fun getInfoWindow(marker: Marker): View? = null
-            @SuppressLint("InflateParams")
-            override fun getInfoContents(marker: Marker): View? {
-                val reporte = marker.tag as? Reporte ?: return null
-                val view = LayoutInflater.from(this@MainActivity).inflate(R.layout.reporte_info_window, null)
-                view.findViewById<TextView>(R.id.tv_titulo).text = reporte.titulo
-                view.findViewById<TextView>(R.id.tv_descripcion).text =
-                    reporte.descripcion?.takeIf { it.isNotEmpty() } ?: "Sin descripción"
-                view.findViewById<TextView>(R.id.tv_fecha).text = reporte.fecha
-                val imageView = view.findViewById<ImageView>(R.id.iv_foto)
-                if (reporte.bitmapCache != null) {
-                    imageView.visibility = View.VISIBLE
-                    imageView.setImageBitmap(reporte.bitmapCache)
-                } else if (!reporte.imagenPath.isNullOrBlank()) {
-                    imageView.visibility = View.VISIBLE
-                    imageView.setImageResource(R.drawable.bg_foto_placeholder)
-                } else {
-                    imageView.visibility = View.GONE
-                }
-                return view
-            }
-        })
 
         mMap.setOnMarkerClickListener { marker ->
-            val reporte = marker.tag as? Reporte
-            if (reporte != null && reporte.bitmapCache == null && !reporte.imagenPath.isNullOrBlank()) {
-                precargarImagen(marker, reporte)
-            }
-            marker.showInfoWindow()
+            val reporte = marker.tag as? Reporte ?: return@setOnMarkerClickListener false
+            mostrarBottomSheet(marker, reporte)
+            
+            marker.setAnchor(0.5f, 1f)
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.position))
 
-            if (reporte != null && reporte.email == session.obtenerEmail()) {
+            if (reporte.email == session.obtenerEmail()) {
                 reporteSeleccionado = reporte
                 markerSeleccionado = marker
                 btnBorrar.visibility = View.VISIBLE
@@ -200,6 +203,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         mMap.setOnMapClickListener {
+            ocultarBottomSheet()
             btnBorrar.visibility = View.GONE
             reporteSeleccionado = null
             markerSeleccionado = null
@@ -207,6 +211,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         requestLocationPermission()
         fetchReportes()
+    }
+
+    private fun mostrarDialogoReporte() {
+        val latLng = currentLatLng
+        if (latLng == null) {
+            Toast.makeText(this, "Esperando ubicación...", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val intent = Intent(this, ReporteActivity::class.java)
+        intent.putExtra("latitud", latLng.latitude)
+        intent.putExtra("longitud", latLng.longitude)
+        startActivity(intent)
     }
 
     private fun mostrarDialogoBorrar(marker: Marker, reporte: Reporte) {
@@ -251,12 +267,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun precargarImagen(marker: Marker, reporte: Reporte, useAlternative: Boolean = false) {
         val imageUrl = if (useAlternative) reporte.alternativeImageUrl else reporte.fullImageUrl
         if (imageUrl == null) return
-        Log.d("IMG_LOAD", "Intentando: $imageUrl")
-        Glide.with(this@MainActivity).asBitmap().load(imageUrl).into(object : com.bumptech.glide.request.target.CustomTarget<Bitmap>() {
+        
+        Glide.with(this).asBitmap().load(imageUrl).into(object : com.bumptech.glide.request.target.CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?) {
                 reporte.bitmapCache = resource
-                if (marker.isInfoWindowShown) {
-                    marker.showInfoWindow()
+                if (reporteActual?.id == reporte.id) {
+                    imgReporte.alpha = 0f
+                    imgReporte.setImageBitmap(resource)
+                    imgReporte.animate().alpha(1f).setDuration(250).start()
                 }
             }
             override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {}
@@ -300,7 +318,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     reporteMarkers.clear()
                     reportes.forEach { reporte ->
                         val latLng = LatLng(reporte.latitud, reporte.longitud)
-                        val marker = mMap.addMarker(MarkerOptions().position(latLng).anchor(0.5f, 1f).icon(createBubbleMarker(reporte.titulo, reporte.email)).title(reporte.titulo))
+                        val marker = mMap.addMarker(MarkerOptions()
+                            .position(latLng)
+                            .anchor(0.5f, 1f)
+                            .icon(createBubbleMarker(reporte.titulo))
+                            .title(reporte.titulo))
                         marker?.tag = reporte
                         marker?.let { reporteMarkers.add(it) }
                     }
@@ -309,45 +331,50 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         })
     }
 
-    private fun createBubbleMarker(titulo: String, email: String): BitmapDescriptor {
+    private fun createBubbleMarker(titulo: String): BitmapDescriptor {
+        val density = resources.displayMetrics.density
+        val padding = (18 * density).toInt()
+        val radius = 22f * density
+        val pointerHeight = 18f * density
+        val title = if (titulo.length > 20) titulo.substring(0, 20) + "…" else titulo
+
         val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.WHITE
-            textSize = 34f
-            typeface = Typeface.DEFAULT_BOLD
+            textSize = 15f * density
+            typeface = Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD)
         }
-        val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.rgb(232, 93, 26)
-            style = Paint.Style.FILL
+        val iconPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.WHITE
+            textSize = 17f * density
         }
-        val padding = 28
-        val tailHeight = 18
-        val bubbleHeight = 70
-        val titleText = if (titulo.length > 22) titulo.substring(0, 22) + "…" else titulo
-        val textWidth = textPaint.measureText(titleText)
-        val bubbleWidth = (textWidth + padding * 2).toInt().coerceAtLeast(140)
-        val totalHeight = bubbleHeight + tailHeight
+        val bubblePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.parseColor("#E85D1A")
+        }
+
+        val textWidth = textPaint.measureText(title)
+        val bubbleWidth = (padding * 2  + 16 * density + textWidth).toInt()
+        val bubbleHeight = (40 * density).toInt()
+        val totalHeight = (bubbleHeight + pointerHeight).toInt()
+
         val bitmap = Bitmap.createBitmap(bubbleWidth, totalHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        canvas.drawRoundRect(RectF(0f, 0f, bubbleWidth.toFloat(), bubbleHeight.toFloat()), 16f, 16f, bgPaint)
-        val tail = Path().apply {
-            moveTo(bubbleWidth / 2f - 12f, bubbleHeight.toFloat())
-            lineTo(bubbleWidth / 2f + 12f, bubbleHeight.toFloat())
-            lineTo(bubbleWidth / 2f, totalHeight.toFloat())
+
+        canvas.drawRoundRect(RectF(0f, 0f, bubbleWidth.toFloat(), bubbleHeight.toFloat()), radius, radius, bubblePaint)
+
+        val cx = bubbleWidth / 2f
+        val path = Path().apply {
+            moveTo(cx - 14 * density, bubbleHeight.toFloat())
+            lineTo(cx + 14 * density, bubbleHeight.toFloat())
+            lineTo(cx, totalHeight.toFloat())
             close()
         }
-        canvas.drawPath(tail, bgPaint)
-        val fontMetrics = textPaint.fontMetrics
-        val textY = (bubbleHeight / 2f) - (fontMetrics.ascent + fontMetrics.descent) / 2f
-        canvas.drawText(titleText, padding.toFloat(), textY, textPaint)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
-    }
+        canvas.drawPath(path, bubblePaint)
 
-    private fun requestLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-        } else {
-            startLocationUpdates()
-        }
+        val font = textPaint.fontMetrics
+        val centerY = bubbleHeight / 2f - (font.ascent + font.descent) / 2f
+        canvas.drawText(title, padding + 12 * density, centerY, textPaint)
+
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -360,18 +387,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun startLocationUpdates() {
         handler.removeCallbacks(locationRunnable)
         handler.post(locationRunnable)
-    }
-
-    private fun createBlueDotIcon(): BitmapDescriptor {
-        val size = 65
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        val cx = size / 2f
-        val cy = size / 2f
-        Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.argb(50, 25, 118, 210); style = Paint.Style.FILL }.also { canvas.drawCircle(cx, cy, size / 2f, it) }
-        Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; style = Paint.Style.FILL }.also { canvas.drawCircle(cx, cy, size / 3.2f, it) }
-        Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(25, 118, 210); style = Paint.Style.FILL }.also { canvas.drawCircle(cx, cy, size / 5f, it) }
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
     private fun updateLocation() {
@@ -393,6 +408,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun createBlueDotIcon(): BitmapDescriptor {
+        val size = 65
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val cx = size / 2f
+        val cy = size / 2f
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.argb(50, 25, 118, 210) }.also { canvas.drawCircle(cx, cy, size / 2f, it) }
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE }.also { canvas.drawCircle(cx, cy, size / 3.2f, it) }
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(25, 118, 210) }.also { canvas.drawCircle(cx, cy, size / 5f, it) }
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
     override fun onResume() {
         super.onResume()
         if (::mMap.isInitialized) {
@@ -409,5 +436,46 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacks(locationRunnable)
+    }
+
+    private fun mostrarBottomSheet(marker: Marker, reporte: Reporte) {
+        reporteActual = reporte
+        txtTitulo.text = reporte.titulo
+        txtDescripcion.text = if (reporte.descripcion.isNullOrBlank()) "Sin descripción" else reporte.descripcion
+        txtFecha.text = reporte.fecha
+
+        if (reporte.bitmapCache != null) {
+            imgReporte.setImageBitmap(reporte.bitmapCache)
+        } else {
+            imgReporte.setImageResource(R.drawable.bg_foto_placeholder)
+            if (!reporte.imagenPath.isNullOrBlank()) {
+                precargarImagen(marker, reporte)
+            }
+        }
+
+        if (bottomSheet.visibility != View.VISIBLE) {
+            bottomSheet.visibility = View.VISIBLE
+            bottomSheet.translationY = 1000f
+            bottomSheet.animate().translationY(0f).setDuration(300).start()
+        }
+    }
+
+    private fun ocultarBottomSheet() {
+        if (bottomSheet.visibility == View.VISIBLE) {
+            bottomSheet.animate().translationY(bottomSheet.height.toFloat()).setDuration(300).withEndAction {
+                bottomSheet.visibility = View.GONE
+            }.start()
+        }
+    }
+
+    private fun mostrarImagenCompleta(bitmap: Bitmap) {
+        val dialog = android.app.Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        val imageView = ImageView(this)
+        imageView.setImageBitmap(bitmap)
+        imageView.setBackgroundColor(Color.BLACK)
+        imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+        dialog.setContentView(imageView)
+        imageView.setOnClickListener { dialog.dismiss() }
+        dialog.show()
     }
 }

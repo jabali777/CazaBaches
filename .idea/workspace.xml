@@ -75,6 +75,12 @@
           <theme>@style/Theme.Practica</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/bottom_sheet_reporte.xml">
+        <config>
+          <state>portrait</state>
+          <theme>@style/Theme.Practica</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/marker_info_window.xml">
         <config>
           <theme>@style/Theme.Practica</theme>
@@ -101,7 +107,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4c1e152-3c44-442c-9d32-dfe53d187fac" name="Changes" comment="" />
+    <list default="true" id="b4c1e152-3c44-442c-9d32-dfe53d187fac" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/bottom_sheet_reporte.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/java/com/example/practica/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/bg_foto_placeholder.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/drawable/bg_foto_placeholder.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CazaBaches/app/src/main/res/layout/reporte_info_window.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,7 +126,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[PhysicalDevice::serial=320145991635]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[LocalEmulator::path=C:\Users\Usuario\.android\avd\Medium_Phone.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -141,8 +157,8 @@
       <list>
         <option value="valueResourceFile" />
         <option value="Kotlin Class" />
-        <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -286,12 +302,12 @@
       <map>
         <entry key="com.example.practica">
           <value>
-            <CheckInfo lastCheckTimestamp="1782702655055" />
+            <CheckInfo lastCheckTimestamp="1783286397919" />
           </value>
         </entry>
         <entry key="com.example.practica.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1782702655052" />
+            <CheckInfo lastCheckTimestamp="1783286397918" />
           </value>
         </entry>
       </map>

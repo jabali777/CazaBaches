@@ -9,19 +9,18 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_menu"
@@ -32,39 +31,46 @@
             android:src="@drawable/ic_menu"
             android:contentDescription="Menú"
             app:backgroundTint="#E85D1A"
-            app:tint="@color/white"
-            app:elevation="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:tint="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_reportar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:contentDescription="Reportar bache"
+            android:contentDescription="Reportar"
             app:srcCompat="@android:drawable/ic_input_add"
             app:backgroundTint="#E85D1A"
-            app:tint="@color/white"
-            app:elevation="5dp"
+            app:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_borrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-            android:contentDescription="Borrar reporte"
-            app:srcCompat="@android:drawable/ic_menu_delete"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            android:contentDescription="Borrar"
             app:backgroundTint="#D32F2F"
-            app:tint="@color/white"
-            app:elevation="5dp"
+            app:tint="@android:color/white"
+            app:srcCompat="@android:drawable/ic_menu_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <include
+            android:id="@+id/bottomSheetReporte"
+            layout="@layout/bottom_sheet_reporte"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,12 +81,14 @@
         android:background="#FFFFFF"
         android:orientation="vertical">
 
+        <!-- Cabecera -->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="170dp"
             android:background="#E85D1A"
-            android:orientation="vertical"
             android:gravity="bottom"
+            android:orientation="vertical"
             android:padding="24dp">
 
             <TextView
@@ -88,61 +96,54 @@
                 android:layout_height="wrap_content"
                 android:text="CazaBaches"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Reportá tu ciudad"
-                android:textColor="#BDFFFFFF"
-                android:textSize="12sp" />
 
         </LinearLayout>
+
+        <!-- Perfil -->
 
         <TextView
             android:id="@+id/nav_perfil"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:text="Perfil"
-            android:textColor="#1A1A1A"
-            android:textSize="15sp"
+            android:layout_height="60dp"
+            android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_person"
-            android:drawablePadding="16dp"
+            android:drawablePadding="18dp"
             android:drawableTint="#E85D1A"
-            android:background="?attr/selectableItemBackground" />
+            android:gravity="center_vertical"
+            android:paddingHorizontal="24dp"
+            android:text="Mi Perfil"
+            android:textColor="#212121"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
             android:background="#EEEEEE" />
+
+        <!-- Configuraciones -->
 
         <TextView
             android:id="@+id/nav_configuraciones"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:text="Configuraciones"
-            android:textColor="#1A1A1A"
-            android:textSize="15sp"
+            android:layout_height="60dp"
+            android:background="?attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_settings"
-            android:drawablePadding="16dp"
+            android:drawablePadding="18dp"
             android:drawableTint="#E85D1A"
-            android:background="?attr/selectableItemBackground" />
+            android:gravity="center_vertical"
+            android:paddingHorizontal="24dp"
+            android:text="Configuraciones"
+            android:textColor="#212121"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
             android:background="#EEEEEE" />
 
         <View
@@ -152,25 +153,26 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="1dp"
             android:background="#EEEEEE" />
+
+        <!-- Cerrar sesión -->
 
         <TextView
             android:id="@+id/nav_cerrar_sesion"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:text="Cerrar sesión"
-            android:textColor="#E85D1A"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:drawableStart="@drawable/ic_logout"
-            android:drawablePadding="16dp"
-            android:drawableTint="#E85D1A"
+            android:layout_height="60dp"
+            android:layout_marginBottom="12dp"
             android:background="?attr/selectableItemBackground"
-            android:layout_marginBottom="16dp" />
+            android:drawableStart="@drawable/ic_logout"
+            android:drawablePadding="18dp"
+            android:drawableTint="#D32F2F"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="24dp"
+            android:text="Cerrar sesión"
+            android:textColor="#D32F2F"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
